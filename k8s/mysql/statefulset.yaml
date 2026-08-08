@@ -28,7 +28,16 @@ spec:
             name: mysql-config
         - secretRef:
             name: mysql-secret
-
+      
+        readinessProbe:
+          exec :
+            command: 
+            - sh
+            - -c
+            - mysqladmin ping -h 127.0.0.1 -u root -p"$MYSQL_ROOT_PASSWORD"
+          initialDelaySeconds: 10
+          periodSeconds : 10
+          timeoutSeconds: 5
   
   volumeClaimTemplates:
   - metadata:
