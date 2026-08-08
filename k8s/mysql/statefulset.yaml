@@ -34,7 +34,7 @@ spec:
             command: 
             - sh
             - -c
-            - mysqladmin ping -h 127.0.0.1 -u root -p"wrong-password"
+            - mysql -h 127.0.0.1 -u root -p"$MYSQL_ROOT_PASSWORD" -e "SELECT 1"
           initialDelaySeconds: 10
           periodSeconds : 10
           timeoutSeconds: 5
