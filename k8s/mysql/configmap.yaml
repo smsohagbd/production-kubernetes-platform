@@ -4,6 +4,6 @@ metadata:
   name : mysql-config
   namespace : production
 data:
-  MYSQL_HOST : mysql
-  MYSQL_PORT : 3306
-  MYSQL_DATABASE : production
+  MYSQL_HOST : "mysql"
+  MYSQL_PORT : "3306"
+  MYSQL_DATABASE : "production"
