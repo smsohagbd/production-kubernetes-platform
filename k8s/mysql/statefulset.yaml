@@ -31,7 +31,7 @@ spec:
         resources:
           requests:
             cpu : 2
-            memeory : 2Gi
+            memory : 2Gi
           limits:
             cpu : 4
             memory : 4Gi
