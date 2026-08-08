@@ -28,13 +28,19 @@ spec:
             name: mysql-config
         - secretRef:
             name: mysql-secret
-      
+        resources:
+          requests:
+            cpu : 2
+            memeory : 2Gi
+          limits:
+            cpu : 4
+            memory : 4Gi
         readinessProbe:
           exec :
             command: 
             - sh
             - -c
-            - mysql -h 127.0.0.1 -u root -p"$MYSQL_ROOT_PASSWORD" -e "SELECT 1"
+            - mysqladmin ping -h 127.0.0.1 -u root -p"$MYSQL_ROOT_PASSWORD"
           initialDelaySeconds: 10
           periodSeconds : 10
           timeoutSeconds: 5
