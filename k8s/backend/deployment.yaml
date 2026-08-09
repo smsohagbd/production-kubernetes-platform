@@ -1,47 +1,46 @@
-apiVersion : apps/v1
-kind : Deployment
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name : backend
-  namespace : production
+  name: backend
+  namespace: production
 spec:
-  replicas : 3
-  selector :
+  replicas: 3
+  selector:
     matchLabels:
-      app : backend
+      app: backend
   template:
     metadata:
       labels:
-        app : backend
+        app: backend
     spec:
-      containers:
-      - name : backend
-        image : busybox:1.36
-        command:
-          - sh
-          - -c
-          - sleep 3600
-      ports:
-      - containerPort : 5000
-        name : backend
-      envFrom:
-      - configMapRef:
-        name : backend-config
-      - secretRef:
-        name : backend-secret
-      resources:
-        requests:
-          cpu : 1
-          memory : 1Gi
-        limits:
-          cpu : 2
-          memory : 2Gi
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight : 100
+          - weight: 100
             podAffinityTerm:
               labelSelector:
                 matchLabels:
-                  app : backend
-              topologyKey : kubernetes.io/hostname
-
+                  app: backend
+              topologyKey: kubernetes.io/hostname
+      containers:
+      - name: backend
+        image: busybox:1.36
+        command:
+        - sh
+        - -c
+        - sleep 3600
+        ports:
+        - containerPort: 5000
+          name: backend
+        envFrom:
+        - configMapRef:
+            name: backend-config
+        - secretRef:
+            name: backend-secret
+        resources:
+          requests:
+            cpu: "1"
+            memory: "1Gi"
+          limits:
+            cpu: "2"
+            memory: "2Gi"
