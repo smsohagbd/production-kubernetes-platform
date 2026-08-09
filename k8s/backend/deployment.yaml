@@ -1,0 +1,37 @@
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name : backend
+  namespace : production
+spec:
+  replicas : 3
+  selector :
+    matchLabels:
+      app : backend
+  template:
+    metadata:
+      labels:
+        app : backend
+    spec:
+      containers:
+      - name : backend
+        image : 
+      ports:
+      - containerPort : 5000
+        name : backend
+      envFrom:
+      - configMapRef:
+        name : backend-config
+      - secretRef:
+        name : backend-secret
+      resources:
+        requests:
+          cpu : 1
+          memory : 1Gi
+        limits:
+          cpu : 2
+          memory : 2Gi
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            topology :

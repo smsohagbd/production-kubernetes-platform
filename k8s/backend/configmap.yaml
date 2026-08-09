@@ -4,7 +4,6 @@ metadata:
   name : backend-config
   namespace : production
 data:
-  APP_NAME : "Production Plartform"
   APP_ENV: "Production"
-  LOG_LEVEL : "Info"
-  API_PORT: "3000"
+  DB_HOST: "mysql"
+  DB_PORT: "3306"
