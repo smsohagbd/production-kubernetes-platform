@@ -20,7 +20,9 @@ jobs:
           uses: astral-sh/setup-uv@v9.0.0
 
         - name: Install dependencies
+          working-directory: backend
           run: uv sync --locked
 
         - name: run py test
+          working-directory: backend
           run: uv run pytest
