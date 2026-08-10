@@ -27,5 +27,11 @@ jobs:
           working-directory: backend
           run: uv run pytest
 
-        - name : build docker image
-          run: docker build -t backend:v1 ./backend
+        - name: build docker image
+          uses: docker/build-push-action@v6
+          with:
+            context: ./backend
+            push: false
+            tags: backend:v1
+            cache-from: type=gha
+            cache-to: type=gha,mode=max
