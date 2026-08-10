@@ -61,3 +61,15 @@ jobs:
 
         - name: Test Kubernetes access
           run: kubectl get deployment backend -n production
+
+        - name: Deploy backend
+          run: |
+            kubectl set image deployment/backend \
+              backend=${{ vars.DOCKERHUB_USERNAME }}/backend:${{ env.IMAGE_TAG }} \
+              -n production
+
+        - name: Wait for rollout
+          run: |
+            kubectl rollout status deployment/backend \
+              -n production \
+              --timeout=180s
