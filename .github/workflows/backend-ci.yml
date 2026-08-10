@@ -35,7 +35,7 @@ jobs:
 
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v4
-          
+
         - name: Set image tag
           run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> "$GITHUB_ENV"
 
@@ -47,3 +47,17 @@ jobs:
             tags: ${{ vars.DOCKERHUB_USERNAME }}/backend:${{ env.IMAGE_TAG }}
             cache-from: type=gha
             cache-to: type=gha,mode=max
+        
+        - name: Set up kubectl
+          uses: azure/setup-kubectl@v4
+          with:
+            version: 'v1.34.10'
+
+        - name: Configure kubectl
+          run: |
+            mkdir -p "$HOME/.kube"
+            echo "${{ secrets.KUBE_CONFIG }}" > "$HOME/.kube/config"
+            chmod 600 "$HOME/.kube/config"
+
+        - name: Test Kubernetes access
+          run: kubectl get deployment backend -n production

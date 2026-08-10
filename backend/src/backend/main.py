@@ -10,4 +10,4 @@ def health():
 
 @app.get("/api")
 def api():
-    return {"message": "backend is running on v1 and with docker"}
+    return {"message": "backend is running"}
