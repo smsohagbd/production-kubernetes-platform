@@ -27,8 +27,11 @@ jobs:
           working-directory: backend
           run: uv run pytest
 
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v4
+
         - name: build docker image
-          uses: docker/build-push-action@v6
+          uses: docker/build-push-action@v7
           with:
             context: ./backend
             push: false
