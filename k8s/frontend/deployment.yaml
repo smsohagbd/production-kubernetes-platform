@@ -15,7 +15,7 @@ spec:
       spec:
         containers:
         - name: frontend
-          image: smsohag/frontend:6dcfdb1
+          image: smsohag/frontend:94db1d5
           ports:
           - containerPort: 80
             name: frontend
