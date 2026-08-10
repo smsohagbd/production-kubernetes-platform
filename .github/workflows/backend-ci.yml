@@ -69,7 +69,28 @@ jobs:
               -n production
 
         - name: Wait for rollout
+          id: rollout
+          continue-on-error: true
           run: |
             kubectl rollout status deployment/backend \
               -n production \
               --timeout=180s
+
+        - name: Rollback if rollout failed
+          if: steps.rollout.outcome == 'failure'
+          run: |
+            echo "Rollout failed. Rolling back..."
+            kubectl rollout undo deployment/backend -n production
+
+        - name: Verify rollback
+          if: steps.rollout.outcome == 'failure'
+          run: |
+            kubectl rollout status deployment/backend \
+              -n production \
+              --timeout=180s
+
+        - name: Fail deployment
+          if: steps.rollout.outcome == 'failure'
+          run: |
+            echo "New deployment failed. Production was rolled back."
+            exit 1
