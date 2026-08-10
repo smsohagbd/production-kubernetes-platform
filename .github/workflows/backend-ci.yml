@@ -26,3 +26,6 @@ jobs:
         - name: run py test
           working-directory: backend
           run: uv run pytest
+
+        - name : build docker image
+          run: docker build -t backend:v1 ./backend
