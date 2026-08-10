@@ -4,14 +4,14 @@ metadata:
   name: frontend
   namespace: production
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: frontend
-  template:
-    metadata:
-      labels:
+    replicas: 3
+    selector:
+      matchLabels:
         app: frontend
+    template:
+      metadata:
+        labels:
+          app: frontend
       spec:
         containers:
         - name: frontend
