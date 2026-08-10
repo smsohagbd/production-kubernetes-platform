@@ -25,6 +25,12 @@ jobs:
               working-directory: frontend
               run: npm run build
 
+            - name: Build Docker image
+              uses: docker/build-push-action@v7
+              with:
+                context: ./frontend
+                push: false
+                tags: frontend:test
 
             
             
