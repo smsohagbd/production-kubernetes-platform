@@ -9,6 +9,7 @@ kind: Role
 metadata:
   name: backend-cd
   namespace: production
+
 rules:
   - apiGroups:
       - apps
@@ -16,13 +17,14 @@ rules:
       - deployments
     resourceNames:
       - backend
+      - frontend
     verbs:
-    - get
-    - patch
-    - update
-    
+      - get
+      - patch
+      - update
+
   - apiGroups:
-        - apps
+      - apps
     resources:
       - deployments
     verbs:
