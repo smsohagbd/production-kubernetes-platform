@@ -8,7 +8,7 @@ spec:
   rules:
     - host: sohag.com.bd
       http:
-        paths: /
+        path: /
         pathType: Prefix
         backend:
           service:
