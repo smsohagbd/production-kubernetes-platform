@@ -24,7 +24,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: backend
-        image: smsohag/backend:cb42687
+        image: smsohag/backend:a2f2630
         ports:
         - containerPort: 5000
           name: backend
