@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend
+  namespace: production
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.sohag.com.bd
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: 
+                name: backend
+              port:
+                number: 5000
