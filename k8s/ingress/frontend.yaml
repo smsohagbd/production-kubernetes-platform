@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+  namespace: production
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: sohag.com.bd
+      http:
+        paths: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number : 80
+
+
+          
