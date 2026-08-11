@@ -8,13 +8,14 @@ spec:
   rules:
     - host: sohag.com.bd
       http:
-       -  path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: frontend
-              port:
-                number : 80
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number : 80
 
 
           
