@@ -16,7 +16,7 @@ function App() {
         setStatus(data.status);
       })
       .catch(() => {
-        setStatus("Backend connection failed");
+        setStatus("Backend connection failed ");
       });
   }, []);
 
