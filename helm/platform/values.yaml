@@ -39,7 +39,7 @@ backend:
     pathType: Prefix
 
 frontend:
-  replicaCount: 3
+  replicaCount: 4
 
   image:
     repository: smsohag/frontend
@@ -47,6 +47,24 @@ frontend:
     pullPolicy: IfNotPresent
 
   port: 80
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchLabels:
+                app: frontend
+            topologyKey: kubernetes.io/hostname
 
   service:
     type: ClusterIP
