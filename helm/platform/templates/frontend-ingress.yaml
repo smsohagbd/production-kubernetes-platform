@@ -4,7 +4,7 @@ metadata:
   name: frontend
   namespace: {{ .Release.Namespace}}
 spec:
-  ingressClassName: {{ .Values.frontend.ingress.ClassName}}
+  ingressClassName: {{ .Values.frontend.ingress.className}}
   rules:
     - host: sohag.com.bd
       http:
