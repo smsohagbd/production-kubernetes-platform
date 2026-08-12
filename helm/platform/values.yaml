@@ -1,5 +1,5 @@
 backend:
-  replicaCount: 3
+  replicaCount: 4
 
   image:
     repository: smsohag/backend
@@ -10,11 +10,11 @@ backend:
 
   resources:
     requests:
-      cpu: "1"
-      memory: "1Gi"
+      cpu: "100m"
+      memory: "128Mi"
     limits:
-      cpu: "2"
-      memory: "2Gi"
+      cpu: "200m"
+      memory: "256Mi"
 
   affinity:
     podAntiAffinity:
@@ -25,3 +25,8 @@ backend:
               matchLabels:
                 app: backend
             topologyKey: kubernetes.io/hostname
+            
+  service:
+    type: ClusterIP
+    port: 5000
+    targetPort: 5000
