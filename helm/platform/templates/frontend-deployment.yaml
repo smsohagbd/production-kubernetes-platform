@@ -7,7 +7,7 @@ metadata:
 
 spec:
   replicas: {{ .Values.frontend.replicaCount}}
-  slector:
+  selector:
     matchLabels:
       app: frontend
   template:
@@ -18,9 +18,9 @@ spec:
       containers:
         - name: frontend
           image: {{ .Values.frontend.image.repository}}:{{ .Values.frontend.image.tag}}
-          imagePullPolicy: {{ .Values.frontend.pullPolicy}}
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy}}
           ports:
-            - name : frontend
+            - name: frontend
               containerPort: {{ .Values.frontend.port}}
           resources: 
             {{- toYaml .Values.frontend.resources | nindent 12 }}
