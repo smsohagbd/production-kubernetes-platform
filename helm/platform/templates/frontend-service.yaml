@@ -6,7 +6,8 @@ metadata:
 spec:
   type: {{ .Values.frontend.type}}
   selector:
-    matchLabels: frontend
+    matchLabels: 
+      app: frontend
     ports:
         - name: frontend
           port: {{ .Values.frontend.service.port}}

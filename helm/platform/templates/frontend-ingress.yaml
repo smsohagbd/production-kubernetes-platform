@@ -8,11 +8,11 @@ spec:
   rules:
     - host: sohag.com.bd
       http:
-        paths:
-          path: {{ .Values.frontend.ingress.path}}
-          pathType: {{ .Values.frontend.ingress.pathType}}
-          backend:
-            service:
-              name : frontend
-              port:
-                number: {{ .Values.frontend.service.port}}
+        - paths:
+            path: {{ .Values.frontend.ingress.path}}
+            pathType: {{ .Values.frontend.ingress.pathType}}
+            backend:
+              service:
+                name : frontend
+                port:
+                  number: {{ .Values.frontend.service.port}}
