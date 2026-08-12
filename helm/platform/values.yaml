@@ -25,8 +25,37 @@ backend:
               matchLabels:
                 app: backend
             topologyKey: kubernetes.io/hostname
-            
+
   service:
     type: ClusterIP
     port: 5000
     targetPort: 5000
+  
+  ingress:
+    enable: true
+    ClassName: nginx
+    host: api.sohag.com.bd
+    path: /
+    pathType: Prefix
+
+frontend:
+  replicaCount: 3
+
+  image:
+    repository: smsohag/frontend
+    tag: 6dcfdb1
+    pullPolicy: IfNotPresent
+
+  port: 80
+
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 80
+
+  ingress:
+    enabled: true
+    className: nginx
+    host: sohag.com.bd
+    path: /
+    pathType: Prefix
