@@ -43,7 +43,7 @@ frontend:
 
   image:
     repository: smsohag/frontend
-    tag: 6dcfdb1
+    tag: 1c71ee7
     pullPolicy: IfNotPresent
 
   port: 80
