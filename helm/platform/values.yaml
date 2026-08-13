@@ -1,5 +1,5 @@
 backend:
-  replicaCount: 4
+  replicaCount: 1
 
   image:
     repository: smsohag/backend
@@ -39,7 +39,7 @@ backend:
     pathType: Prefix
 
 frontend:
-  replicaCount: 4
+  replicaCount: 1
 
   image:
     repository: smsohag/frontend
