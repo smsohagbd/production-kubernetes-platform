@@ -13,7 +13,7 @@ metadata:
 spec:
   ingressClassName: {{ .Values.frontend.ingress.className}}
   rules:
-    - host: sohag.com.bd
+    - host: {{ .Values.frontend.ingress.host}}
       http:
         paths:
          -  path: {{ .Values.frontend.ingress.path}}
