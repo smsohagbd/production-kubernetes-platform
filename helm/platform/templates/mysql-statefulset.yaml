@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefullSet
+metadata:
+  name : mysql
+  namespace: {{ .Release.Namespace}}
+spec:
+  serviceName: mysql
+  replicas: {{ .Values.mysql.replicaCount}}
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app : mysql
+    spec: 
+      containers:
+        - name: mysql
+          image: "{{ .Values.mysql.image.repository}}:{{ .Values.mysql.image.tag}}"
+          imagePullPolicy: {{ .Values.mysql.image.pullPolicy}}
+          ports:
+            - name: mysql
+              containerPort: {{ .Values.mysql.port}}
+          envFrom:
+            - configMapRef:
+                name: mysql-configmap
+            - secretMapRef:
+                name: mysql-secret
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - mysqladmin ping -h 127.0.0.1 -u root -p"$MYSQL_ROOT_PASSWORD"
+              initialDelay: 10
+              perioadSeconds: 10
+              timeoutSeconds: 5
+
+          resources:
+            {{- toYaml .Values.mysql.resources | nindent 12 }}
+
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+
+  volumeClaimTemplates:
+    - metadata
+        name: mysql-data
+      spec:
+        accessMode: 
+        - {{ .Values.mysql.persistence.accessMode}}
+        resources:
+          requests:
+            {{ .Values.mysql.persistence.size}}
+        storageClassName: {{ .Values.mysql.persistence.storageClass}}

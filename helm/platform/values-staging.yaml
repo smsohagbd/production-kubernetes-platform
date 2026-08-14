@@ -4,23 +4,18 @@ backend:
   image:
     tag: a2f2630
 
-  affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app: backend
-              topologyKey: kubernetes.io/hostname
-
   resources:
     requests:
-      cpu: "100m"
+      cpu: "50m"
       memory: "128Mi"
     limits:
-      cpu: "200m"
+      cpu: "100m"
       memory: "256Mi"
+
+  config:
+    appEnv: Staging
+    dbHost: mysql
+    dbPort: "3306"
 
   ingress:
     host: api-staging.sohag.com.bd
@@ -34,21 +29,11 @@ frontend:
 
   resources:
     requests:
-      cpu: "100m"
+      cpu: "50m"
       memory: "128Mi"
     limits:
-      cpu: "200m"
+      cpu: "110m"
       memory: "256Mi"
-      
-  affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app: backend
-              topologyKey: kubernetes.io/hostname
 
   ingress:
     host: staging.sohag.com.bd
