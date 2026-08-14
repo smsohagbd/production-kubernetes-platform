@@ -4,13 +4,6 @@ kind: Deployment
 metadata:
   name: backend
   namespace: {{ .Release.Namespace }}
-  labels:
-    app: backend
-    app.kubernetes.io/managed-by: Helm
-
-  annotations:
-    meta.helm.sh/release-name: production
-    meta.helm.sh/release-namespace: production
 
 spec:
   replicas: {{ .Values.backend.replicaCount }}

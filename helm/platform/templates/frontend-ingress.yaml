@@ -3,13 +3,6 @@ kind: Ingress
 metadata:
   name: frontend
   namespace: {{ .Release.Namespace}}
-  labels:
-    app: frontend
-    app.kubernetes.io/managed-by: Helm
-
-  annotations:
-    meta.helm.sh/release-name: production
-    meta.helm.sh/release-namespace: production
 spec:
   ingressClassName: {{ .Values.frontend.ingress.className}}
   rules:
