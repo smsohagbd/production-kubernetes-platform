@@ -6,11 +6,11 @@ backend:
 
   resources:
     requests:
-      cpu: "1"
-      memory: "1Gi"
+      cpu: "50m"
+      memory: "128Mi"
     limits:
-      cpu: "2"
-      memory: "2Gi"
+      cpu: "100m"
+      memory: "256Mi"
 
   affinity:
         podAntiAffinity:
@@ -44,11 +44,11 @@ frontend:
 
   resources:
     requests:
-      cpu: "1"
-      memory: "1Gi"
+      cpu: "50m"
+      memory: "128Mi"
     limits:
-      cpu: "2"
-      memory: "2Gi"
+      cpu: "100m"
+      memory: "256Mi"
 
   ingress:
     host: sohag.com.bd
