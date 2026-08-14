@@ -23,8 +23,8 @@ spec:
               containerPort: {{ .Values.mysql.port}}
           envFrom:
             - configMapRef:
-                name: mysql-configmap
-            - secretMapRef:
+                name: mysql-config
+            - secretRef:
                 name: mysql-secret
           readinessProbe:
             exec:
@@ -32,9 +32,9 @@ spec:
                 - sh
                 - -c
                 - mysqladmin ping -h 127.0.0.1 -u root -p"$MYSQL_ROOT_PASSWORD"
-              initialDelay: 10
-              perioadSeconds: 10
-              timeoutSeconds: 5
+            initialDelaySeconds: 10
+            periodSeconds : 10
+            timeoutSeconds: 5
 
           resources:
             {{- toYaml .Values.mysql.resources | nindent 12 }}
@@ -48,7 +48,7 @@ spec:
       name: mysql-data
     spec:
       accessMode: 
-       - {{ .Values.mysql.persistence.accessMode}}
+      - {{ .Values.mysql.persistence.accessMode}}
       resources:
         requests:
           storage: {{ .Values.mysql.persistence.size}}
