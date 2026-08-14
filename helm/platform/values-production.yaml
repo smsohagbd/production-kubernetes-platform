@@ -12,6 +12,16 @@ backend:
       cpu: "2"
       memory: "2Gi"
 
+  affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: backend
+              topologyKey: kubernetes.io/hostname
+
   ingress:
     host: api.sohag.com.bd
 
@@ -21,6 +31,16 @@ frontend:
 
   image:
     tag: 1c71ee7
+  
+  affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: backend
+              topologyKey: kubernetes.io/hostname
 
   resources:
     requests:

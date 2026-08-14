@@ -4,6 +4,16 @@ backend:
   image:
     tag: a2f2630
 
+  affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: backend
+              topologyKey: kubernetes.io/hostname
+
   resources:
     requests:
       cpu: "100m"
@@ -29,6 +39,16 @@ frontend:
     limits:
       cpu: "200m"
       memory: "256Mi"
+      
+  affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: backend
+              topologyKey: kubernetes.io/hostname
 
   ingress:
     host: staging.sohag.com.bd
