@@ -44,7 +44,7 @@ spec:
               mountPath: /var/lib/mysql
 
   volumeClaimTemplates:
-    - metadata
+    - metadata:
         name: mysql-data
       spec:
         accessMode: 
