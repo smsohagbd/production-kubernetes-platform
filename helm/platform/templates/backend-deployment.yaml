@@ -4,7 +4,6 @@ kind: Deployment
 metadata:
   name: backend
   namespace: {{ .Release.Namespace }}
-
 spec:
   replicas: {{ .Values.backend.replicaCount }}
 
