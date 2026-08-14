@@ -1,5 +1,5 @@
 backend:
-  replicaCount: 1
+  replicaCount: 3
 
   image:
     tag: a2f2630
@@ -22,7 +22,7 @@ backend:
 
 
 frontend:
-  replicaCount: 1
+  replicaCount: 3
 
   image:
     tag: 1c71ee7
