@@ -23,7 +23,7 @@ function App() {
   return (
     <div>
       <h1>Production Kubernetes Platform</h1>
-      <p>Backend status v2: {status}</p>
+      <p>Backend status v3: {status}</p>
     </div>
   );
 }

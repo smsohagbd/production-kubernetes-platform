@@ -7,6 +7,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "https://sohag.com.bd",
+        "https://staging.sohag.com.bd",
     ],
     allow_credentials=True,
     allow_methods=["*"],
