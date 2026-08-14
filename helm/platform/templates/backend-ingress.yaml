@@ -11,7 +11,7 @@ metadata:
     meta.helm.sh/release-name: production
     meta.helm.sh/release-namespace: production
 spec:
-  ingressClassName: {{ .Values.backend.ingress.ClassName}}
+  ingressClassName: {{ .Values.backend.ingress.className}}
   rules:
     - host: {{ .Values.backend.ingress.host}}
       http:

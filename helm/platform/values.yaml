@@ -1,70 +1,35 @@
 backend:
-  replicaCount: 1
-
   image:
     repository: smsohag/backend
-    tag: a2f2630
     pullPolicy: IfNotPresent
 
   port: 5000
+  
+  config:
+    appEnv: Production
+    dbHost: mysql
+    dbPort: "3306"
 
-  resources:
-    requests:
-      cpu: "100m"
-      memory: "128Mi"
-    limits:
-      cpu: "200m"
-      memory: "256Mi"
 
-  affinity:
-    podAntiAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
-              matchLabels:
-                app: backend
-            topologyKey: kubernetes.io/hostname
 
   service:
     type: ClusterIP
     port: 5000
     targetPort: 5000
-  
+
   ingress:
-    enable: true
-    ClassName: nginx
-    host: api.sohag.com.bd
+    enabled: true
+    className: nginx
     path: /
     pathType: Prefix
 
-frontend:
-  replicaCount: 1
 
+frontend:
   image:
     repository: smsohag/frontend
-    tag: 1c71ee7
     pullPolicy: IfNotPresent
 
   port: 80
-
-  resources:
-    requests:
-      cpu: "100m"
-      memory: "128Mi"
-    limits:
-      cpu: "200m"
-      memory: "256Mi"
-
-  affinity:
-    podAntiAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
-              matchLabels:
-                app: frontend
-            topologyKey: kubernetes.io/hostname
 
   service:
     type: ClusterIP
@@ -74,6 +39,5 @@ frontend:
   ingress:
     enabled: true
     className: nginx
-    host: sohag.com.bd
     path: /
     pathType: Prefix

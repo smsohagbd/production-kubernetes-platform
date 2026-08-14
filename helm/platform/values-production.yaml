@@ -1,0 +1,34 @@
+backend:
+  replicaCount: 3
+
+  image:
+    tag: a2f2630
+
+  resources:
+    requests:
+      cpu: "1"
+      memory: "1Gi"
+    limits:
+      cpu: "2"
+      memory: "2Gi"
+
+  ingress:
+    host: api.sohag.com.bd
+
+
+frontend:
+  replicaCount: 3
+
+  image:
+    tag: 1c71ee7
+
+  resources:
+    requests:
+      cpu: "1"
+      memory: "1Gi"
+    limits:
+      cpu: "2"
+      memory: "2Gi"
+
+  ingress:
+    host: sohag.com.bd
