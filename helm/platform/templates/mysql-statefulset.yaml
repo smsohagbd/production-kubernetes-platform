@@ -44,12 +44,12 @@ spec:
               mountPath: /var/lib/mysql
 
   volumeClaimTemplates:
-    - metadata:
-        name: mysql-data
-      spec:
-        accessMode: 
-        - {{ .Values.mysql.persistence.accessMode}}
-        resources:
-          requests:
-            {{ .Values.mysql.persistence.size}}
-        storageClassName: {{ .Values.mysql.persistence.storageClass}}
+  - metadata:
+      name: mysql-data
+    spec:
+      accessMode: 
+       - {{ .Values.mysql.persistence.accessMode}}
+      resources:
+        requests:
+          storage: {{ .Values.mysql.persistence.size}}
+      storageClassName: {{ .Values.mysql.persistence.storageClass}}
