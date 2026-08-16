@@ -1,0 +1,29 @@
+name: Helm CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "helm/**"
+
+jobs:
+  helm-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v4
+
+      - name: Helm lint
+        run: |
+          helm lint helm/platform
+
+      - name: Helm template staging
+        run: |
+          helm template staging helm/platform \
+            -n staging \
+            -f helm/platform/values-staging.yaml
