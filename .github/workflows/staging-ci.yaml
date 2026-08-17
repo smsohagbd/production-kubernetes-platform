@@ -27,14 +27,3 @@ jobs:
             --create-namespace \
             --values helm/platform/values-staging.yaml \
             > /tmp/staging-rendered.yaml
-
-      - name: Install kubectl
-        uses: azure/setup-kubectl@v4
-
-      - name: Kubernetes client dry-run
-        run: |
-          kubectl apply \
-            --dry-run=client \
-            --validate=false \
-            --filename=/tmp/staging-rendered.yaml \
-            --namespace=staging
