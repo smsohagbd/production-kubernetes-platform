@@ -22,4 +22,4 @@ def health():
 
 @app.get("/api")
 def api():
-    return {"message": "backend is running"}
+    return {"message": "backend is running on staging"}
