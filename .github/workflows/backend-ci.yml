@@ -1,7 +1,13 @@
+name: Backend CI
+
 on:
   push:
     paths:
     - 'backend/**'
+
+permissions:
+  contents: write
+
 
 jobs:
   backend-ci:
