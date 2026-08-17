@@ -1,0 +1,39 @@
+name: Staging CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate-staging:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v4
+
+      - name: Helm lint
+        run: |
+          helm lint helm/platform
+
+      - name: Helm template
+        run: |
+          helm template staging helm/platform \
+            --namespace staging \
+            --create-namespace \
+            --values helm/platform/values-staging.yaml \
+            > /tmp/staging-rendered.yaml
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Kubernetes client dry-run
+        run: |
+          kubectl apply \
+            --dry-run=client \
+            --filename=/tmp/staging-rendered.yaml \
+            --namespace=staging
