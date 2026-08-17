@@ -3,4 +3,3 @@ Understanding staging area
 Understanding feature branches
 Learning Git merge workflow
 Learning Git rebase workflow
-
