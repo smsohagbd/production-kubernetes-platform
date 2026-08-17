@@ -53,7 +53,7 @@ jobs:
 
         - name: update image tag to yaml file
           env:
-            IMAGE_TAG=${{ env.IMAGE_TAG}}
+            IMAGE_TAG: ${{ env.IMAGE_TAG}}
           run: |
             yq -i '.backend.image.tag = strenv(IMAGE_TAG)' \
               helm/platform/values-staging.yaml
