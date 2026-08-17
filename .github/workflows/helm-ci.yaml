@@ -1,14 +1,15 @@
-name: Helm CI
+name: Staging CI
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - "helm/**"
+      - 'helm/platform/**'
+      - '.github/workflows/helm-ci.yaml'
 
 jobs:
-  helm-validation:
+  validate-staging:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,5 +26,13 @@ jobs:
       - name: Helm template staging
         run: |
           helm template staging helm/platform \
-            -n staging \
-            -f helm/platform/values-staging.yaml
+            --namespace staging \
+            --values helm/platform/values-staging.yaml \
+            > /tmp/staging-rendered.yaml
+
+      - name: Helm template production
+        run: |
+          helm template production helm/platform \
+            --namespace production \
+            --values helm/platform/values-production.yaml \
+            > /tmp/production-rendered.yaml
