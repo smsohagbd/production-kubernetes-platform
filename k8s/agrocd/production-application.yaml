@@ -5,16 +5,20 @@ metadata:
   namespace: argocd
 
 spec:
-  repoURL: https://github.com/smsohagbd/production-kubernetes-platform.git
-  targetRevision: main
-  path: helm/platform
-  helm:
-    valueFiles:
-      - values-production.yaml
+  project: default
+
+  source:
+    repoURL: https://github.com/smsohagbd/production-kubernetes-platform.git
+    targetRevision: main
+    path: helm/platform
+    helm:
+      valueFiles:
+        - values-production.yaml
   
   destination:
     server: https://kubernetes.default.svc
     namespace: production
+    
   syncPolicy:
     automated:
       prune: true
