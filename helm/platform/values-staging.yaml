@@ -18,11 +18,9 @@ backend:
 frontend:
   replicaCount: 3
   image:
-    tag: 1c71ee7
-
+    tag: c09f008
   config:
     apiUrl: https://api-staging.sohag.com.bd
-  
   resources:
     requests:
       cpu: "50m"
