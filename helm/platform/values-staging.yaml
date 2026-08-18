@@ -16,7 +16,7 @@ backend:
   ingress:
     host: api-staging.sohag.com.bd
 frontend:
-  replicaCount: 1
+  replicaCount: 2
   image:
     tag: c09f008
   config:
