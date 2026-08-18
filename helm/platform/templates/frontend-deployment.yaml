@@ -23,11 +23,11 @@ spec:
               containerPort: {{ .Values.frontend.port}}
           resources: 
             {{- toYaml .Values.frontend.resources | nindent 12 }}
-                volumeMounts:
-        - name: frontend-config
-          mountPath: /usr/share/nginx/html/config.js
-          subPath: config.js
-          readOnly: true
+          volumeMounts:
+            - name: frontend-config
+              mountPath: /usr/share/nginx/html/config.js
+              subPath: config.js
+              readOnly: true
           
       affinity:
         {{- toYaml .Values.frontend.affinity | nindent 8 }}
