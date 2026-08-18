@@ -1,9 +1,7 @@
 backend:
   replicaCount: 3
-
   image:
-    tag: a2f2630
-
+    tag: 1a75ad3
   resources:
     requests:
       cpu: "50m"
@@ -11,25 +9,20 @@ backend:
     limits:
       cpu: "100m"
       memory: "256Mi"
-
   config:
     appEnv: Staging
     dbHost: mysql
     dbPort: "3306"
-
   ingress:
     host: api-staging.sohag.com.bd
-
-
 frontend:
   replicaCount: 3
-
   image:
     tag: 1c71ee7
-  
+
   config:
     apiUrl: https://api-staging.sohag.com.bd
-
+  
   resources:
     requests:
       cpu: "50m"
@@ -37,6 +30,5 @@ frontend:
     limits:
       cpu: "110m"
       memory: "256Mi"
-
   ingress:
     host: staging.sohag.com.bd
