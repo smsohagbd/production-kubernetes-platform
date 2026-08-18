@@ -18,7 +18,7 @@ backend:
 frontend:
   replicaCount: 2
   image:
-    tag: c09f008
+    tag: 0bccb7c
   config:
     apiUrl: https://api-staging.sohag.com.bd
   resources:
