@@ -63,6 +63,7 @@ jobs:
           run: |
             yq -i '.backend.image.tag = strenv(IMAGE_TAG)' \
               helm/platform/values-staging.yaml
+              
         - name: verify image tag
           run: |
             yq '.backend.image.tag' helm/platform/values-staging.yaml

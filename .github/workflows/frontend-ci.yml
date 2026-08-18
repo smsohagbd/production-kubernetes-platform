@@ -40,35 +40,27 @@ jobs:
                 context: ./frontend
                 push: true
                 tags: ${{ vars.DOCKERHUB_USERNAME }}/frontend:${{ env.IMAGE_TAG }}
-                build-args: |
-                  VITE_API_URL=https://api.sohag.com.bd
                 cache-from: type=gha
                 cache-to: type=gha,mode=max
+            
+            - name: install yq
+              uses: mikefarah/yq@v4
 
-            ##### CD k8s
-            - name: Set up kubectl
-              uses: azure/setup-kubectl@v4
-              with:
-                version: 'v1.34.10'
-
-            - name: Configure kubectl
+            - name: update image tag to yaml file
+              env:
+                IMAGE_TAG: ${{ env.IMAGE_TAG}}
               run: |
-                mkdir -p "$HOME/.kube"
-                echo "${{ secrets.KUBE_CONFIG }}" > "$HOME/.kube/config"
-                chmod 600 "$HOME/.kube/config"
-
-            - name: Test Kubernetes access
-              run: kubectl get deployment frontend -n production
-
-            - name: Deploy frontend
+                yq -i '.frontend.image.tag = strenv(IMAGE_TAG)' \
+                  helm/platform/values-staging.yaml
+            - name: verify image tag
               run: |
-                kubectl set image deployment/frontend \
-                  frontend=${{ vars.DOCKERHUB_USERNAME }}/frontend:${{ env.IMAGE_TAG }} \
-                  -n production
-
-            - name: Wait for rollout
+                yq '.backend.image.tag' helm/platform/values-staging.yaml
+                
+            - name: Commit staging image update
               run: |
-                kubectl rollout status deployment/frontend \
-                  -n production \
-                  --timeout=180s
-                        
+                git config user.name "github-action[bot]"
+                git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+                git add helm/platform/values-staging.yaml
+                git commit -m "ci: update staging backend image to ${IMAGE_TAG}"
+                git push

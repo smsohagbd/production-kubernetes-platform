@@ -26,6 +26,9 @@ frontend:
 
   image:
     tag: 1c71ee7
+  
+  config:
+    apiUrl: https://api-staging.sohag.com.bd
 
   resources:
     requests:

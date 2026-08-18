@@ -31,6 +31,9 @@ frontend:
 
   image:
     tag: 1c71ee7
+
+  config:
+    apiUrl: https://api.sohag.com.bd
   
   affinity:
         podAntiAffinity:
