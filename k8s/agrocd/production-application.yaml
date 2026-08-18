@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: production
+  namespace: argocd
+
+spec:
+  repoURL: https://github.com/smsohagbd/production-kubernetes-platform.git
+  targetRevision: main
+  path: helm/platform
+  helm:
+    valueFiles:
+      - values-production.yaml
+  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
