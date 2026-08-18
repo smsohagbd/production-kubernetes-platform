@@ -1,7 +1,7 @@
 backend:
   replicaCount: 3
   image:
-    tag: 1a75ad3
+    tag: "3891860"
   resources:
     requests:
       cpu: "50m"
