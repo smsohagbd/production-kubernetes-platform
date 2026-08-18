@@ -30,7 +30,7 @@ frontend:
   replicaCount: 3
 
   image:
-    tag: 1c71ee7
+    tag: 0bccb7c
 
   config:
     apiUrl: https://api.sohag.com.bd
