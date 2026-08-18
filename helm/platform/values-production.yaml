@@ -1,8 +1,8 @@
 backend:
-  replicaCount: 3
+  replicaCount: 1
 
   image:
-    tag: a2f2630
+    tag: "3891860"
 
   resources:
     requests:
@@ -27,7 +27,7 @@ backend:
 
 
 frontend:
-  replicaCount: 3
+  replicaCount: 1
 
   image:
     tag: 0bccb7c
