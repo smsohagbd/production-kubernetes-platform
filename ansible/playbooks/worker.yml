@@ -7,6 +7,12 @@
       ansible.builtin.apt:
         name: curl
         state: present
+    - name: Create Ansilbe file
+      ansible.builtin.file:
+        path: /opt/ansible-test.txt
+        state: touch
+
+    
 
 
 
