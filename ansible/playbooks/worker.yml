@@ -1,0 +1,13 @@
+- name: Configure worker servers
+  hosts: workers
+  become: true
+
+  tasks:
+    - name: Insure Curl is install
+      ansible.builtin.apt:
+        name: curl
+        state: present
+
+
+
+
