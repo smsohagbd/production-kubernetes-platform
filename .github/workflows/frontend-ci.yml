@@ -4,7 +4,7 @@ on:
         - "frontend/**"
 permissions:
       contents: write
-      
+
 jobs:
     frontend-ci:
         runs-on: ubuntu-latest
