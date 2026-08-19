@@ -7,10 +7,12 @@
       ansible.builtin.apt:
         name: curl
         state: present
-    - name: Create Ansilbe file
+
+    - name: Ensure Ansible test directory exists
       ansible.builtin.file:
-        path: /opt/ansible-test.txt
-        state: touch
+        path: /opt/ansible-test
+        state: directory
+        mode: '0755'
 
     
 
