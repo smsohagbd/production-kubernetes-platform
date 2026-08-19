@@ -8,13 +8,21 @@
         name: curl
         state: present
 
-    - name: Ensure Ansible test directory exists
-      ansible.builtin.file:
-        path: /opt/ansible-test
-        state: directory
-        mode: '0755'
-
-    
+    - name: Load Kubernetes kernel modules
+      community.general.modprobe:
+        name: "{{ item  }}"
+        state: present
+      loop:
+        - overlay
+        - br_netfilter
+    - name: Persist Kubernetes kernel modules
+      ansible.builtin.copy:
+        dest: /etc/modules-load.d/kubernetes.conf
+        content: |
+          overlay
+          br_netfilter
+        chmod: '0644'
+      
 
 
 
