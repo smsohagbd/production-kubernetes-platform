@@ -1,0 +1,20 @@
+- name: Join Kubernetes worker
+  hosts: workers
+  become: true
+
+  vars_files:
+    - ../join-vars.yml
+    
+  tasks:
+    - name: Check if worker is already joined
+      ansible.builtin.stat:
+        path: /etc/kubernetes/kubelet.conf
+      register: kubelet_config
+
+    - name: Join worker to Kubernetes cluster
+      ansible.builtin.command:
+        cmd: >
+          kubeadm join {{ k8s_api_endpoint }}
+          --token {{ k8s_join_token }}
+          --discovery-token-ca-cert-hash {{ k8s_ca_hash }}
+      when: not kubelet_config.stat.exists
