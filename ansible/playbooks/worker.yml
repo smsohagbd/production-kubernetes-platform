@@ -70,4 +70,4 @@
       ansible.builtin.systemd:
         name: containerd
         state: started
-        enable: true
+        enabled: true
