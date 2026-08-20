@@ -3,11 +3,6 @@
   become: true
 
   tasks:
-    - name: Insure Curl is install
-      ansible.builtin.apt:
-        name: curl
-        state: present
-
     - name: Load Kubernetes kernel modules
       community.general.modprobe:
         name: "{{ item }}"
@@ -38,7 +33,14 @@
         - name: net.ipv4.ip_forward
           value: "1"
       
-
+    - name: Install required packages
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - curl
+          - gpg
+        state: present
+        update_cache: true
 
 
 
