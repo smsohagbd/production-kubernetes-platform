@@ -1,0 +1,7 @@
+backend
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfstate.backup
+*.tfvars
+test.py
