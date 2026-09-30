@@ -1,7 +1,17 @@
-backend
-.terraform/
+# Terraform working directory
+**/.terraform/
+
+# Terraform state
 *.tfstate
 *.tfstate.*
-terraform.tfstate.backup
+
+# Terraform variable files with real values
 *.tfvars
+
+# Keep example variable files
+!*.tfvars.example
+# Old Terraform project
+terraform-old/
+
+# Local test files
 test.py
